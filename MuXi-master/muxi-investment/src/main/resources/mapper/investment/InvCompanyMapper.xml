@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muxi.investment.mapper.InvCompanyMapper">
+    
+    <resultMap type="InvCompany" id="InvCompanyResult">
+        <result property="code"    column="code"    />
+        <result property="gsmc"    column="gsmc"    />
+        <result property="ywmc"    column="ywmc"    />
+        <result property="cym"    column="cym"    />
+        <result property="agdm"    column="agdm"    />
+        <result property="agjc"    column="agjc"    />
+        <result property="bgdm"    column="bgdm"    />
+        <result property="bgjc"    column="bgjc"    />
+        <result property="hgdm"    column="hgdm"    />
+        <result property="hgjc"    column="hgjc"    />
+        <result property="zqlb"    column="zqlb"    />
+        <result property="sshy"    column="sshy"    />
+        <result property="ssjys"    column="ssjys"    />
+        <result property="sszjhhy"    column="sszjhhy"    />
+        <result property="zjl"    column="zjl"    />
+        <result property="frdb"    column="frdb"    />
+        <result property="dm"    column="dm"    />
+        <result property="dsz"    column="dsz"    />
+        <result property="zqswdb"    column="zqswdb"    />
+        <result property="dlds"    column="dlds"    />
+        <result property="lxdh"    column="lxdh"    />
+        <result property="dzxx"    column="dzxx"    />
+        <result property="cz"    column="cz"    />
+        <result property="gswz"    column="gswz"    />
+        <result property="bgdz"    column="bgdz"    />
+        <result property="zcdz"    column="zcdz"    />
+        <result property="qy"    column="qy"    />
+        <result property="yzbm"    column="yzbm"    />
+        <result property="zczb"    column="zczb"    />
+        <result property="gsdj"    column="gsdj"    />
+        <result property="gyrs"    column="gyrs"    />
+        <result property="glryrs"    column="glryrs"    />
+        <result property="lssws"    column="lssws"    />
+        <result property="kjssws"    column="kjssws"    />
+        <result property="gsjj"    column="gsjj"    />
+        <result property="jyfw"    column="jyfw"    />
+        <result property="clrq"    column="clrq"    />
+        <result property="ssrq"    column="ssrq"    />
+        <result property="wsfxrq"    column="wsfxrq"    />
+        <result property="fxfs"    column="fxfs"    />
+        <result property="fxsyl"    column="fxsyl"    />
+        <result property="fxl"    column="fxl"    />
+        <result property="mgmz"    column="mgmz"    />
+        <result property="mgfxj"    column="mgfxj"    />
+        <result property="fxfy"    column="fxfy"    />
+        <result property="fxzsz"    column="fxzsz"    />
+        <result property="mjzjje"    column="mjzjje"    />
+        <result property="srkpj"    column="srkpj"    />
+        <result property="srspj"    column="srspj"    />
+        <result property="srhsl"    column="srhsl"    />
+        <result property="srzgj"    column="srzgj"    />
+        <result property="wxpszql"    column="wxpszql"    />
+        <result property="djzql"    column="djzql"    />
+    </resultMap>
+
+    <sql id="selectInvCompanyVo">
+        select code, gsmc, ywmc, cym, agdm, agjc, bgdm, bgjc, hgdm, hgjc, zqlb, sshy, ssjys, sszjhhy, zjl, frdb, dm, dsz, zqswdb, dlds, lxdh, dzxx, cz, gswz, bgdz, zcdz, qy, yzbm, zczb, gsdj, gyrs, glryrs, lssws, kjssws, gsjj, jyfw, clrq, ssrq, wsfxrq, fxfs, fxsyl, fxl, mgmz, mgfxj, fxfy, fxzsz, mjzjje, srkpj, srspj, srhsl, srzgj, wxpszql, djzql from inv_company
+    </sql>
+
+    <select id="selectInvCompanyList" parameterType="InvCompany" resultMap="InvCompanyResult">
+        <include refid="selectInvCompanyVo"/>
+        <where>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="gsmc != null  and gsmc != ''"> and gsmc = #{gsmc}</if>
+            <if test="ywmc != null  and ywmc != ''"> and ywmc = #{ywmc}</if>
+            <if test="cym != null  and cym != ''"> and cym = #{cym}</if>
+            <if test="agdm != null  and agdm != ''"> and agdm = #{agdm}</if>
+            <if test="agjc != null  and agjc != ''"> and agjc like concat('%', #{agjc}, '%')</if>
+            <if test="bgdm != null  and bgdm != ''"> and bgdm = #{bgdm}</if>
+            <if test="bgjc != null  and bgjc != ''"> and bgjc like concat('%', #{bgjc}, '%')</if>
+            <if test="hgdm != null  and hgdm != ''"> and hgdm = #{hgdm}</if>
+            <if test="hgjc != null  and hgjc != ''"> and hgjc like concat('%', #{hgjc}, '%')</if>
+            <if test="zqlb != null  and zqlb != ''"> and zqlb = #{zqlb}</if>
+            <if test="sshy != null  and sshy != ''"> and sshy = #{sshy}</if>
+            <if test="ssjys != null  and ssjys != ''"> and ssjys = #{ssjys}</if>
+            <if test="sszjhhy != null  and sszjhhy != ''"> and sszjhhy = #{sszjhhy}</if>
+            <if test="zjl != null  and zjl != ''"> and zjl = #{zjl}</if>
+            <if test="frdb != null  and frdb != ''"> and frdb = #{frdb}</if>
+            <if test="dm != null  and dm != ''"> and dm = #{dm}</if>
+            <if test="dsz != null  and dsz != ''"> and dsz = #{dsz}</if>
+            <if test="zqswdb != null  and zqswdb != ''"> and zqswdb = #{zqswdb}</if>
+            <if test="dlds != null  and dlds != ''"> and dlds = #{dlds}</if>
+            <if test="lxdh != null  and lxdh != ''"> and lxdh = #{lxdh}</if>
+            <if test="dzxx != null  and dzxx != ''"> and dzxx = #{dzxx}</if>
+            <if test="cz != null  and cz != ''"> and cz = #{cz}</if>
+            <if test="gswz != null  and gswz != ''"> and gswz = #{gswz}</if>
+            <if test="bgdz != null  and bgdz != ''"> and bgdz = #{bgdz}</if>
+            <if test="zcdz != null  and zcdz != ''"> and zcdz = #{zcdz}</if>
+            <if test="qy != null  and qy != ''"> and qy = #{qy}</if>
+            <if test="yzbm != null  and yzbm != ''"> and yzbm = #{yzbm}</if>
+            <if test="zczb != null "> and zczb = #{zczb}</if>
+            <if test="gsdj != null  and gsdj != ''"> and gsdj = #{gsdj}</if>
+            <if test="gyrs != null "> and gyrs = #{gyrs}</if>
+            <if test="glryrs != null "> and glryrs = #{glryrs}</if>
+            <if test="lssws != null  and lssws != ''"> and lssws = #{lssws}</if>
+            <if test="kjssws != null  and kjssws != ''"> and kjssws = #{kjssws}</if>
+            <if test="gsjj != null  and gsjj != ''"> and gsjj = #{gsjj}</if>
+            <if test="jyfw != null  and jyfw != ''"> and jyfw = #{jyfw}</if>
+            <if test="clrq != null "> and clrq = #{clrq}</if>
+            <if test="ssrq != null "> and ssrq = #{ssrq}</if>
+            <if test="wsfxrq != null "> and wsfxrq = #{wsfxrq}</if>
+            <if test="fxfs != null  and fxfs != ''"> and fxfs = #{fxfs}</if>
+            <if test="fxsyl != null "> and fxsyl = #{fxsyl}</if>
+            <if test="fxl != null "> and fxl = #{fxl}</if>
+            <if test="mgmz != null "> and mgmz = #{mgmz}</if>
+            <if test="mgfxj != null "> and mgfxj = #{mgfxj}</if>
+            <if test="fxfy != null "> and fxfy = #{fxfy}</if>
+            <if test="fxzsz != null "> and fxzsz = #{fxzsz}</if>
+            <if test="mjzjje != null "> and mjzjje = #{mjzjje}</if>
+            <if test="srkpj != null "> and srkpj = #{srkpj}</if>
+            <if test="srspj != null "> and srspj = #{srspj}</if>
+            <if test="srhsl != null "> and srhsl = #{srhsl}</if>
+            <if test="srzgj != null "> and srzgj = #{srzgj}</if>
+            <if test="wxpszql != null "> and wxpszql = #{wxpszql}</if>
+            <if test="djzql != null "> and djzql = #{djzql}</if>
+        </where>
+    </select>
+    
+    <select id="selectInvCompanyByCode" parameterType="String" resultMap="InvCompanyResult">
+        <include refid="selectInvCompanyVo"/>
+        where code = #{code}
+    </select>
+        
+    <insert id="insertInvCompany" parameterType="InvCompany">
+        insert into inv_company
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code != null">code,</if>
+            <if test="gsmc != null">gsmc,</if>
+            <if test="ywmc != null">ywmc,</if>
+            <if test="cym != null">cym,</if>
+            <if test="agdm != null">agdm,</if>
+            <if test="agjc != null">agjc,</if>
+            <if test="bgdm != null">bgdm,</if>
+            <if test="bgjc != null">bgjc,</if>
+            <if test="hgdm != null">hgdm,</if>
+            <if test="hgjc != null">hgjc,</if>
+            <if test="zqlb != null">zqlb,</if>
+            <if test="sshy != null">sshy,</if>
+            <if test="ssjys != null">ssjys,</if>
+            <if test="sszjhhy != null">sszjhhy,</if>
+            <if test="zjl != null">zjl,</if>
+            <if test="frdb != null">frdb,</if>
+            <if test="dm != null">dm,</if>
+            <if test="dsz != null">dsz,</if>
+            <if test="zqswdb != null">zqswdb,</if>
+            <if test="dlds != null">dlds,</if>
+            <if test="lxdh != null">lxdh,</if>
+            <if test="dzxx != null">dzxx,</if>
+            <if test="cz != null">cz,</if>
+            <if test="gswz != null">gswz,</if>
+            <if test="bgdz != null">bgdz,</if>
+            <if test="zcdz != null">zcdz,</if>
+            <if test="qy != null">qy,</if>
+            <if test="yzbm != null">yzbm,</if>
+            <if test="zczb != null">zczb,</if>
+            <if test="gsdj != null">gsdj,</if>
+            <if test="gyrs != null">gyrs,</if>
+            <if test="glryrs != null">glryrs,</if>
+            <if test="lssws != null">lssws,</if>
+            <if test="kjssws != null">kjssws,</if>
+            <if test="gsjj != null">gsjj,</if>
+            <if test="jyfw != null">jyfw,</if>
+            <if test="clrq != null">clrq,</if>
+            <if test="ssrq != null">ssrq,</if>
+            <if test="wsfxrq != null">wsfxrq,</if>
+            <if test="fxfs != null">fxfs,</if>
+            <if test="fxsyl != null">fxsyl,</if>
+            <if test="fxl != null">fxl,</if>
+            <if test="mgmz != null">mgmz,</if>
+            <if test="mgfxj != null">mgfxj,</if>
+            <if test="fxfy != null">fxfy,</if>
+            <if test="fxzsz != null">fxzsz,</if>
+            <if test="mjzjje != null">mjzjje,</if>
+            <if test="srkpj != null">srkpj,</if>
+            <if test="srspj != null">srspj,</if>
+            <if test="srhsl != null">srhsl,</if>
+            <if test="srzgj != null">srzgj,</if>
+            <if test="wxpszql != null">wxpszql,</if>
+            <if test="djzql != null">djzql,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="code != null">#{code},</if>
+            <if test="gsmc != null">#{gsmc},</if>
+            <if test="ywmc != null">#{ywmc},</if>
+            <if test="cym != null">#{cym},</if>
+            <if test="agdm != null">#{agdm},</if>
+            <if test="agjc != null">#{agjc},</if>
+            <if test="bgdm != null">#{bgdm},</if>
+            <if test="bgjc != null">#{bgjc},</if>
+            <if test="hgdm != null">#{hgdm},</if>
+            <if test="hgjc != null">#{hgjc},</if>
+            <if test="zqlb != null">#{zqlb},</if>
+            <if test="sshy != null">#{sshy},</if>
+            <if test="ssjys != null">#{ssjys},</if>
+            <if test="sszjhhy != null">#{sszjhhy},</if>
+            <if test="zjl != null">#{zjl},</if>
+            <if test="frdb != null">#{frdb},</if>
+            <if test="dm != null">#{dm},</if>
+            <if test="dsz != null">#{dsz},</if>
+            <if test="zqswdb != null">#{zqswdb},</if>
+            <if test="dlds != null">#{dlds},</if>
+            <if test="lxdh != null">#{lxdh},</if>
+            <if test="dzxx != null">#{dzxx},</if>
+            <if test="cz != null">#{cz},</if>
+            <if test="gswz != null">#{gswz},</if>
+            <if test="bgdz != null">#{bgdz},</if>
+            <if test="zcdz != null">#{zcdz},</if>
+            <if test="qy != null">#{qy},</if>
+            <if test="yzbm != null">#{yzbm},</if>
+            <if test="zczb != null">#{zczb},</if>
+            <if test="gsdj != null">#{gsdj},</if>
+            <if test="gyrs != null">#{gyrs},</if>
+            <if test="glryrs != null">#{glryrs},</if>
+            <if test="lssws != null">#{lssws},</if>
+            <if test="kjssws != null">#{kjssws},</if>
+            <if test="gsjj != null">#{gsjj},</if>
+            <if test="jyfw != null">#{jyfw},</if>
+            <if test="clrq != null">#{clrq},</if>
+            <if test="ssrq != null">#{ssrq},</if>
+            <if test="wsfxrq != null">#{wsfxrq},</if>
+            <if test="fxfs != null">#{fxfs},</if>
+            <if test="fxsyl != null">#{fxsyl},</if>
+            <if test="fxl != null">#{fxl},</if>
+            <if test="mgmz != null">#{mgmz},</if>
+            <if test="mgfxj != null">#{mgfxj},</if>
+            <if test="fxfy != null">#{fxfy},</if>
+            <if test="fxzsz != null">#{fxzsz},</if>
+            <if test="mjzjje != null">#{mjzjje},</if>
+            <if test="srkpj != null">#{srkpj},</if>
+            <if test="srspj != null">#{srspj},</if>
+            <if test="srhsl != null">#{srhsl},</if>
+            <if test="srzgj != null">#{srzgj},</if>
+            <if test="wxpszql != null">#{wxpszql},</if>
+            <if test="djzql != null">#{djzql},</if>
+         </trim>
+    </insert>
+
+    <update id="updateInvCompany" parameterType="InvCompany">
+        update inv_company
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="gsmc != null">gsmc = #{gsmc},</if>
+            <if test="ywmc != null">ywmc = #{ywmc},</if>
+            <if test="cym != null">cym = #{cym},</if>
+            <if test="agdm != null">agdm = #{agdm},</if>
+            <if test="agjc != null">agjc = #{agjc},</if>
+            <if test="bgdm != null">bgdm = #{bgdm},</if>
+            <if test="bgjc != null">bgjc = #{bgjc},</if>
+            <if test="hgdm != null">hgdm = #{hgdm},</if>
+            <if test="hgjc != null">hgjc = #{hgjc},</if>
+            <if test="zqlb != null">zqlb = #{zqlb},</if>
+            <if test="sshy != null">sshy = #{sshy},</if>
+            <if test="ssjys != null">ssjys = #{ssjys},</if>
+            <if test="sszjhhy != null">sszjhhy = #{sszjhhy},</if>
+            <if test="zjl != null">zjl = #{zjl},</if>
+            <if test="frdb != null">frdb = #{frdb},</if>
+            <if test="dm != null">dm = #{dm},</if>
+            <if test="dsz != null">dsz = #{dsz},</if>
+            <if test="zqswdb != null">zqswdb = #{zqswdb},</if>
+            <if test="dlds != null">dlds = #{dlds},</if>
+            <if test="lxdh != null">lxdh = #{lxdh},</if>
+            <if test="dzxx != null">dzxx = #{dzxx},</if>
+            <if test="cz != null">cz = #{cz},</if>
+            <if test="gswz != null">gswz = #{gswz},</if>
+            <if test="bgdz != null">bgdz = #{bgdz},</if>
+            <if test="zcdz != null">zcdz = #{zcdz},</if>
+            <if test="qy != null">qy = #{qy},</if>
+            <if test="yzbm != null">yzbm = #{yzbm},</if>
+            <if test="zczb != null">zczb = #{zczb},</if>
+            <if test="gsdj != null">gsdj = #{gsdj},</if>
+            <if test="gyrs != null">gyrs = #{gyrs},</if>
+            <if test="glryrs != null">glryrs = #{glryrs},</if>
+            <if test="lssws != null">lssws = #{lssws},</if>
+            <if test="kjssws != null">kjssws = #{kjssws},</if>
+            <if test="gsjj != null">gsjj = #{gsjj},</if>
+            <if test="jyfw != null">jyfw = #{jyfw},</if>
+            <if test="clrq != null">clrq = #{clrq},</if>
+            <if test="ssrq != null">ssrq = #{ssrq},</if>
+            <if test="wsfxrq != null">wsfxrq = #{wsfxrq},</if>
+            <if test="fxfs != null">fxfs = #{fxfs},</if>
+            <if test="fxsyl != null">fxsyl = #{fxsyl},</if>
+            <if test="fxl != null">fxl = #{fxl},</if>
+            <if test="mgmz != null">mgmz = #{mgmz},</if>
+            <if test="mgfxj != null">mgfxj = #{mgfxj},</if>
+            <if test="fxfy != null">fxfy = #{fxfy},</if>
+            <if test="fxzsz != null">fxzsz = #{fxzsz},</if>
+            <if test="mjzjje != null">mjzjje = #{mjzjje},</if>
+            <if test="srkpj != null">srkpj = #{srkpj},</if>
+            <if test="srspj != null">srspj = #{srspj},</if>
+            <if test="srhsl != null">srhsl = #{srhsl},</if>
+            <if test="srzgj != null">srzgj = #{srzgj},</if>
+            <if test="wxpszql != null">wxpszql = #{wxpszql},</if>
+            <if test="djzql != null">djzql = #{djzql},</if>
+        </trim>
+        where code = #{code}
+    </update>
+
+    <delete id="deleteInvCompanyByCode" parameterType="String">
+        delete from inv_company where code = #{code}
+    </delete>
+
+    <delete id="deleteInvCompanyByCodes" parameterType="String">
+        delete from inv_company where code in 
+        <foreach item="code" collection="array" open="(" separator="," close=")">
+            #{code}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muxi.investment.mapper.InvStockMapper">
+    
+    <resultMap type="InvStock" id="InvStockResult">
+        <result property="code"    column="code"    />
+        <result property="name"    column="name"    />
+        <result property="market"    column="market"    />
+    </resultMap>
+
+    <sql id="selectInvStockVo">
+        select code, name, market from inv_stock
+    </sql>
+
+    <select id="selectInvStockVoNoDelisting" parameterType="String" resultMap="InvStockResult">
+        <include refid="selectInvStockVo"/>
+        <where>
+            name not like '退市%' and (market is not null or market!='')
+        </where>
+    </select>
+
+    <select id="selectInvStockList" parameterType="InvStock" resultMap="InvStockResult">
+        <include refid="selectInvStockVo"/>
+        <where>  
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="market != null  and market != ''"> and market = #{market}</if>
+        </where>
+    </select>
+    
+    <select id="selectInvStockByCode" parameterType="String" resultMap="InvStockResult">
+        <include refid="selectInvStockVo"/>
+        where code = #{code}
+    </select>
+        
+    <insert id="insertInvStock" parameterType="InvStock">
+        insert into inv_stock
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code != null">code,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="market != null and market != ''">market,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="code != null">#{code},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="market != null and market != ''">#{market},</if>
+         </trim>
+    </insert>
+
+    <update id="updateInvStock" parameterType="InvStock">
+        update inv_stock
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="market != null and market != ''">market = #{market},</if>
+        </trim>
+        where code = #{code}
+    </update>
+
+    <delete id="deleteInvStockByCode" parameterType="String">
+        delete from inv_stock where code = #{code}
+    </delete>
+
+    <delete id="deleteInvStockByCodes" parameterType="String">
+        delete from inv_stock where code in 
+        <foreach item="code" collection="array" open="(" separator="," close=")">
+            #{code}
+        </foreach>
+    </delete>
+
+</mapper>

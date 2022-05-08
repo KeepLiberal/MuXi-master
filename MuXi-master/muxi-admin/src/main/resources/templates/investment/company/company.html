@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('公司基本信息列表')" />
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            <label>股票代码：</label>
+                            <input type="text" name="code"/>
+                        </li>
+                        <li>
+                            <label>A股简称：</label>
+                            <input type="text" name="agjc"/>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="investment:company:add">
+                <i class="fa fa-plus"></i> 添加
+            </a>
+            <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="investment:company:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="investment:company:remove">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="investment:company:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer" />
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('investment:company:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('investment:company:remove')}]];
+    var prefix = ctx + "investment/company";
+
+    $(function() {
+        var options = {
+            url: prefix + "/list",
+            createUrl: prefix + "/add",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove",
+            exportUrl: prefix + "/export",
+            modalName: "公司基本信息",
+            columns: [{
+                checkbox: true
+            },
+                {
+                    field: 'code',
+                    title: '股票代码',
+                    visible: true
+                },
+                {
+                    field: 'gsmc',
+                    title: '公司名称'
+                },
+                {
+                    field: 'ywmc',
+                    title: '英文名称'
+                },
+                {
+                    field: 'cym',
+                    title: '曾用名'
+                },
+                {
+                    field: 'agdm',
+                    title: 'A股代码'
+                },
+                {
+                    field: 'agjc',
+                    title: 'A股简称'
+                },
+                {
+                    field: 'bgdm',
+                    title: 'B股代码'
+                },
+                {
+                    field: 'bgjc',
+                    title: 'B股简称'
+                },
+                {
+                    field: 'hgdm',
+                    title: 'H股代码'
+                },
+                {
+                    field: 'hgjc',
+                    title: 'H股简称'
+                },
+                {
+                    field: 'zqlb',
+                    title: '证券类别'
+                },
+                {
+                    field: 'sshy',
+                    title: '所属东财行业'
+                },
+                {
+                    field: 'ssjys',
+                    title: '上市交易所'
+                },
+                {
+                    field: 'sszjhhy',
+                    title: '所属证监会行业'
+                },
+                {
+                    field: 'zjl',
+                    title: '总经理'
+                },
+                {
+                    field: 'frdb',
+                    title: '法人代表'
+                },
+                {
+                    field: 'dm',
+                    title: '董秘'
+                },
+                {
+                    field: 'dsz',
+                    title: '董事长'
+                },
+                {
+                    field: 'zqswdb',
+                    title: '证券事务代表'
+                },
+                {
+                    field: 'dlds',
+                    title: '独立董事'
+                },
+                {
+                    field: 'lxdh',
+                    title: '联系电话'
+                },
+                {
+                    field: 'dzxx',
+                    title: '电子信箱'
+                },
+                {
+                    field: 'cz',
+                    title: '传真'
+                },
+                {
+                    field: 'gswz',
+                    title: '公司网址'
+                },
+                {
+                    field: 'bgdz',
+                    title: '办公地址'
+                },
+                {
+                    field: 'zcdz',
+                    title: '注册地址'
+                },
+                {
+                    field: 'qy',
+                    title: '区域'
+                },
+                {
+                    field: 'yzbm',
+                    title: '邮政编码'
+                },
+                {
+                    field: 'zczb',
+                    title: '注册资本(元)'
+                },
+                {
+                    field: 'gsdj',
+                    title: '工商登记'
+                },
+                {
+                    field: 'gyrs',
+                    title: '雇员人数'
+                },
+                {
+                    field: 'glryrs',
+                    title: '管理人员人数'
+                },
+                {
+                    field: 'lssws',
+                    title: '律师事务所'
+                },
+                {
+                    field: 'kjssws',
+                    title: '会计师事务所'
+                },
+                {
+                    field: 'gsjj',
+                    title: '公司简介'
+                },
+                {
+                    field: 'jyfw',
+                    title: '经营范围'
+                },
+                {
+                    field: 'clrq',
+                    title: '成立日期'
+                },
+                {
+                    field: 'ssrq',
+                    title: '上市日期'
+                },
+                {
+                    field: 'wsfxrq',
+                    title: '网上发行日期'
+                },
+                {
+                    field: 'fxfs',
+                    title: '发行方式'
+                },
+                {
+                    field: 'fxsyl',
+                    title: '发行市盈率(倍)'
+                },
+                {
+                    field: 'fxl',
+                    title: '发行量(股)'
+                },
+                {
+                    field: 'mgmz',
+                    title: '每股面值(元)'
+                },
+                {
+                    field: 'mgfxj',
+                    title: '每股发行价(元)'
+                },
+                {
+                    field: 'fxfy',
+                    title: '发行费用(元)'
+                },
+                {
+                    field: 'fxzsz',
+                    title: '发行总市值(元)'
+                },
+                {
+                    field: 'mjzjje',
+                    title: '募集资金净额(元)'
+                },
+                {
+                    field: 'srkpj',
+                    title: '首日开盘价(元)'
+                },
+                {
+                    field: 'srspj',
+                    title: '首日收盘价(元)'
+                },
+                {
+                    field: 'srhsl',
+                    title: '首日换手率'
+                },
+                {
+                    field: 'srzgj',
+                    title: '首日最高价(元)'
+                },
+                {
+                    field: 'wxpszql',
+                    title: '网下配售中签率%'
+                },
+                {
+                    field: 'djzql',
+                    title: '定价中签率%'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.code + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.code + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+        };
+        $.table.init(options);
+    });
+</script>
+</body>
+</html>
